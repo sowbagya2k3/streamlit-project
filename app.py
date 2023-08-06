@@ -45,9 +45,9 @@ with upload:
             
 with pivot:
     df=st.session_state.dfFiltered
-    #veera account --- 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
-    llm=OpenAI(api_token="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")
-    #llm = Starcoder(api_token="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")
+    
+    llm=OpenAI(api_token="sk-in2XSzc4RaB45kra25NAfcaT3BlbkFJrrkaL5IjfJQA8XRW1rySAC")
+    
     pandas_ai = PandasAI(llm)
     #import matplotlib
     matplotlib.use('TkAgg')
