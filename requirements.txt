@@ -7,7 +7,6 @@ matplotlib
 pandas_profiling
 streamlit-aggrid
 streamlit-sortables
-scikit-learn
 st_material_table
 ydata-profiling
 pygwalker
