@@ -10,7 +10,7 @@ from pandasai.llm.openai import OpenAI
 from pandasai.llm.starcoder import Starcoder
 import matplotlib.pyplot as plt
 
-#(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)
+
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
 st.header("Explotary Data Analisis !!")
 upload,edit,pivot=st.tabs(["uploaded Data","clean Data","AI"])
