@@ -1,0 +1,16 @@
+altair
+pandas
+streamlit
+streamlit_pandas_profiling
+mpld3
+matplotlib
+pandas_profiling
+streamlit-aggrid
+streamlit-sortables
+scikit-learn
+st_material_table
+ydata-profiling
+pygwalker
+dora
+streamlit-extras
+pandasai
