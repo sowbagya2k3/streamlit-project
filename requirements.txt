@@ -1,5 +1,4 @@
 altair
-numpy==12.5.1
 pandas
 streamlit
 streamlit_pandas_profiling
@@ -13,5 +12,3 @@ pygwalker
 streamlit-extras
 pandasai
 scikit-learn
-logchain
-openai
