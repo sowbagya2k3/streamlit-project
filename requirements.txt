@@ -13,3 +13,6 @@ pygwalker
 dora
 streamlit-extras
 pandasai
+scikit-learn
+logchain
+openai

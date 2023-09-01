@@ -14,9 +14,15 @@ import matplotlib.pyplot as plt
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
 st.header("Explotary Data Analisis !!")
 upload,edit,pivot=st.tabs(["uploaded Data","clean Data","AI"])
-st.session_state.dfFiltered=None
+#st.session_state.dfFiltered=None
 def ulploaddata(sel):
-    match sel:
+    print("y")
+           
+
+with upload:
+
+    Selection = st.selectbox("Data source",["CSV","XML","Excel","JSON","API","Database"])
+    match Selection:
         case "CSV":
             col1,col2=st.columns(2)
             
@@ -31,16 +37,21 @@ def ulploaddata(sel):
             
                
         case "XML":
-            pdf=pd.read_xml()            
-
-with upload:
-    Selection = st.selectbox("Data source",["CSV","XML","Excel","JSON","API","Database"])
-    ulploaddata(Selection)
+            col1,col2=st.columns(2)
+            
+            filename=col1.file_uploader("Select file",type="csv")
+            delimeter=col2.text_input("Deleimeter",value=",")
+            qualifier=col2.text_input("Text Qualifier",value='"')
+            proces=col1.button("upload")
+            if proces:
+                if filename:
+                    df=pd.read_xml(filename,delimiter=delimeter,quotechar=qualifier)
+                    st.session_state.dfFiltered=df   
+    
     dfu=st.session_state.dfFiltered
     #st.dataframe(df)
-    if dfu is not None:
-        st.session_state.dfFiltered = dataframe_explorer(dfu, case=False)
-        st.dataframe(st.session_state.dfFiltered, use_container_width=True)
+    st.session_state.dfFiltered = dataframe_explorer(st.session_state.dfFiltered)#, case=False)
+    st.dataframe(st.session_state.dfFiltered, use_container_width=True)
             
             
 with pivot:
