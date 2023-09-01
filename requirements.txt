@@ -2,7 +2,6 @@ altair
 phik
 pandas==2.1.0
 streamlit
-streamlit_pandas_profiling
 mpld3
 matplotlib
 streamlit-aggrid
