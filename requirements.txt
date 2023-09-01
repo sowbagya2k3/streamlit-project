@@ -1,4 +1,5 @@
 altair
+phik
 pandas
 streamlit
 streamlit_pandas_profiling
