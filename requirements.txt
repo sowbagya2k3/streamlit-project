@@ -1,5 +1,5 @@
 altair
-numpy
+numpy==12.5.1
 pandas
 streamlit
 streamlit_pandas_profiling
