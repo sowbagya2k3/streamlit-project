@@ -9,7 +9,6 @@ streamlit-sortables
 st_material_table
 ydata-profiling
 pygwalker
-dora
 streamlit-extras
 pandasai
 scikit-learn
