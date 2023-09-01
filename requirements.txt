@@ -1,4 +1,5 @@
 altair
+numpy
 pandas
 streamlit
 streamlit_pandas_profiling
