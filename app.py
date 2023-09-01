@@ -2,7 +2,7 @@ import matplotlib
 import streamlit as st
 import numpy as np
 import pandas as pd
-from st_aggrid import AgGrid,GridOptionsBuilder,DataReturnMode
+
 from streamlit_sortables import sort_items
 from streamlit_extras.dataframe_explorer import dataframe_explorer
 from pandasai import PandasAI
