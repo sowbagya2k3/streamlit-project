@@ -1,11 +1,8 @@
-altair
 pandas==2.1.0
 streamlit
 mpld3
-matplotlib
-streamlit-aggrid
+matplotlib==3.7.2
 streamlit-sortables
-st_material_table
 ydata-profiling
 pygwalker
 streamlit-extras
