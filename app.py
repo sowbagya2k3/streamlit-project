@@ -39,14 +39,66 @@ with upload:
         case "XML":
             col1,col2=st.columns(2)
             
-            filename=col1.file_uploader("Select file",type="csv")
-            delimeter=col2.text_input("Deleimeter",value=",")
-            qualifier=col2.text_input("Text Qualifier",value='"')
+            filename=col1.file_uploader("Select file",type="xml")
+           
             proces=col1.button("upload")
             if proces:
                 if filename:
-                    df=pd.read_xml(filename,delimiter=delimeter,quotechar=qualifier)
+                    df=pd.read_xml(filename)
                     st.session_state.dfFiltered=df   
+        case "JSON":
+            col1,col2=st.columns(2)
+            
+            filename=col1.file_uploader("Select file",type="json")
+            
+            proces=col1.button("upload")
+            if proces:
+                if filename:
+                    df=pd.read_json(filename)
+                    st.session_state.dfFiltered=df
+        case "Excel":
+            col1,col2=st.columns(2)
+            
+            filename=col1.file_uploader("Select file",type="xlsx")
+            sheetName=col2.text_input("eneter sheet name")
+            proces=col1.button("upload")
+            if proces:
+                if filename:
+                    df=pd.read_excel(filename,sheet_name=sheetName)
+                    st.session_state.dfFiltered=df
+        case "API":
+            import requests
+            from requests.auth import HTTPDigestAuth
+            import json
+            url=st.text_input("Enter the URL")
+            isauth=st.radio("Authendication",["Credentails","API Key"])
+
+            if isauth=="Credentails":
+                user=st.text_input("Eneter User name")
+                password=st.text_input("Enter Password",type='password')
+            if isauth=="API Key":
+                user=st.text_input("Eneter API Key")
+               
+            process=st.button("get data")
+            if process:
+                if isauth=="Credentails":
+                    auth = HTTPDigestAuth(user, password)
+                    res=requests.get(url=url,auth=auth)
+                elif isauth=="Credentails":
+                    headers = {'Authorization': '[api_key]',}
+                    res=requests.get(url=url,headers=headers)
+                else:
+                    res=requests.get(url=url)
+                if(res.status_code==200):
+                    if "json" in res.headers["Content-Type"]:
+                        j=json.load(res.json)
+                        df=pd.read_json(j)
+                        st.session_state.dfFiltered=df
+                
+
+           
+            
+
     if 'dfFiltered' in st.session_state:
         dfu=st.session_state.dfFiltered
         #st.dataframe(df)
@@ -78,11 +130,18 @@ with edit:
     if "dfFiltered" in st.session_state:
         pde=st.session_state.dfFiltered
         if pde is not None:
-            c1,c2,c3=st.columns(3)
+            c2,c3=st.columns(spec=[0.7,0.3])
             with st.container():
-                c1.text("Drop na Values")
-                selected=c2.multiselect("select columns",options=pde.columns.to_list())
+                
+                selected=c2.multiselect("Drop na Values",options=pde.columns.to_list(),)
                 dropna=c3.button("Apply")
                 if dropna:
-                    pde.dropna(subset=selected)
+                    pde.dropna(subset=selected,inplace=True)
+            with st.container():
+                
+                drop=c2.multiselect("drop duplicates",options=pde.columns.to_list(),key="drop")
+                dropdup=c3.button("Apply",key="dropb")
+                if dropdup:
+                    pde.drop_duplicates(drop,inplace=True)
+
             st.session_state.dfFiltered=st.data_editor(pde)

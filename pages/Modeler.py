@@ -3,12 +3,13 @@ import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
 import pickle
 from sklearn.metrics import accuracy_score
-
-if "dfFiltered" in st.session_state:
-    df=st.session_state.dfFiltered
-    tabs=st.tabs(["New","Saved Model"])
-    
-    with tabs[0]:
+tabs=st.tabs(["New","Saved Model"])
+with tabs[0]:
+    if "dfFiltered" in st.session_state:
+        df=st.session_state.dfFiltered
+        
+        
+        
         #with st.form("design"):
         model=st.selectbox("select Model",["Logistic Regression","Linear Regression","Random Forest Classifier","Naive Bayes Classifier","KNN","Decision Tree"])
         outcome=st.selectbox("Select outcome columns",df.columns)
@@ -167,6 +168,21 @@ if "dfFiltered" in st.session_state:
                 
                 st.metric("predicted value",model.predict(dfp[:1]))
 
-    
-else:
-    st.warning("load data using main page")
+
+    else:
+        st.warning("load data using main page")
+with tabs[1]:
+        
+        import glob;
+        listoption=[""]
+        for file in glob.glob("*.sav"):
+            listoption.append(file)
+        
+        sel=st.selectbox("select the model",options=listoption)
+        
+        
+        if len(sel)>0:
+
+            dfp=st.data_editor(pd.read_pickle(sel.split(".")[0]+".pkl")[:1])
+            model=pickle.load(open(sel,'rb'))
+            st.metric("predicted value",model.predict(dfp[:1]))
