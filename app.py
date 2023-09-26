@@ -107,7 +107,8 @@ with upload:
             
             
 with pivot:
-    if "dfFiltered" in st.session_state:
+    filtered=False
+    if "dfFiltered" in st.session_state and filtered:
         df=st.session_state.dfFiltered
         
         api_token=st.text_input("enter API Key",type="password")
