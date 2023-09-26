@@ -7,4 +7,3 @@ streamlit-extras
 pandasai
 scikit-learn
 openpyxl
-matplotlib
