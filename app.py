@@ -8,7 +8,7 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 from pandasai.llm.starcoder import Starcoder
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
@@ -121,7 +121,7 @@ with pivot:
                 pandas_ai = PandasAI(llm,conversational=True)
         
 #import matplotlib
-                matplotlib.use('TkAgg')
+                #matplotlib.use('TkAgg')
                 ques=st.text_input("enter your quetion here")
         #if prompt is not None:
     
