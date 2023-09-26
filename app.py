@@ -109,21 +109,31 @@ with upload:
 with pivot:
     if "dfFiltered" in st.session_state:
         df=st.session_state.dfFiltered
-    
-        llm=OpenAI(api_token="sk-in2XSzc4RaB45kra25NAfcaT3BlbkFJrrkaL5IjfJQA8XRW1rySAC")
-    
-        pandas_ai = PandasAI(llm)
-    #import matplotlib
-        matplotlib.use('TkAgg')
-        prompt=st.text_area("enter your quetion here")
-        if prompt is not None:
-            LOAD=st.button("LOAD")
-            if LOAD:
-                returnVal=pandas_ai(df, prompt=prompt)
-                print(returnVal)
+        
+        api_token=st.text_input("enter API Key",type="password")
+        
+        
+        
             
-            #plt.hist(Val)
-            #st.pyplot(plt)
+        llm=OpenAI(api_token=api_token)
+    
+        pandas_ai = PandasAI(llm,conversational=True)
+        
+#import matplotlib
+        matplotlib.use('TkAgg')
+        ques=st.text_input("enter your quetion here")
+        #if prompt is not None:
+    
+        l=st.button("LOAD")
+        print("print(ques)")
+        print(ques)
+        if l:
+           
+            returnVal=pandas_ai(df, prompt=ques)
+            #print(returnVal)
+            st.write(returnVal)
+        #plt.hist(Val)
+        #st.pyplot(plt)
 
             
 with edit:
