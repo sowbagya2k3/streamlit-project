@@ -8,7 +8,7 @@ from streamlit_extras.dataframe_explorer import dataframe_explorer
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 from pandasai.llm.starcoder import Starcoder
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
