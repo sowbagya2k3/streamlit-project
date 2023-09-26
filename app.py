@@ -113,28 +113,27 @@ with pivot:
         api_token=st.text_input("enter API Key",type="password")
         
         
-        
-            
-        llm=OpenAI(api_token=api_token)
+        if api_token is not None:
+            try:
+                llm=OpenAI(api_token=api_token)
     
-        pandas_ai = PandasAI(llm,conversational=True)
+                pandas_ai = PandasAI(llm,conversational=True)
         
 #import matplotlib
-        matplotlib.use('TkAgg')
-        ques=st.text_input("enter your quetion here")
+                matplotlib.use('TkAgg')
+                ques=st.text_input("enter your quetion here")
         #if prompt is not None:
     
-        l=st.button("LOAD")
-        print("print(ques)")
-        print(ques)
-        if l:
+                l=st.button("LOAD")
+                if l:
            
-            returnVal=pandas_ai(df, prompt=ques)
+                    returnVal=pandas_ai(df, prompt=ques)
             #print(returnVal)
-            st.write(returnVal)
+                    st.write(returnVal)
         #plt.hist(Val)
         #st.pyplot(plt)
-
+            except:
+                print("some error")
             
 with edit:
     if "dfFiltered" in st.session_state:
